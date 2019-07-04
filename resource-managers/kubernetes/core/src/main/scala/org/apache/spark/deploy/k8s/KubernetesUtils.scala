@@ -18,6 +18,16 @@ package org.apache.spark.deploy.k8s
 
 import org.apache.spark.SparkConf
 import org.apache.spark.util.Utils
+import org.apache.spark.internal.Logging
+import io.fabric8.kubernetes.client.KubernetesClient
+import org.apache.hadoop.fs.{FileSystem, Path}
+import io.fabric8.kubernetes.api.model.{Container, ContainerBuilder, ContainerStateRunning, ContainerStateTerminated, ContainerStateWaiting, ContainerStatus, Pod, PodBuilder, Quantity, QuantityBuilder}
+import java.io.{File, IOException}
+
+import org.apache.spark.{SparkConf, SparkException}
+
+import scala.collection.JavaConverters._
+
 
 private[spark] object KubernetesUtils extends Logging {
 
